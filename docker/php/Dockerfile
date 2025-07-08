@@ -17,6 +17,7 @@ RUN apk add --no-cache bzip2-dev
 RUN apk add --no-cache curl-dev
 RUN apk add --no-cache icu-dev
 
+
 # Configure GD extension with optimizations
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
@@ -26,6 +27,8 @@ RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pgsql
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install intl
+
 # RUN docker-php-ext-install fileinfo
 RUN docker-php-ext-install exif
 RUN docker-php-ext-install pcntl
