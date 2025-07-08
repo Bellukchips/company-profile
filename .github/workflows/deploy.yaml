@@ -36,7 +36,7 @@ jobs:
           sudo chown -R $(whoami):$(whoami) . || true
 
           # Alternative approach: Use sudo git if ownership fix doesn't work
-          git pull origin Main || sudo git pull origin Main
+          git pull origin main || sudo git pull origin main
 
           # Reset web permissions after git pull
           sudo chown -R www-data:www-data storage/ bootstrap/cache/ || true
