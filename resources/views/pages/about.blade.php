@@ -107,7 +107,7 @@
         <section id="about" class="about section">
 
             <div class="container">
-                {!! $about->content !!}
+                {!! $about->content ?? '' !!}
             </div>
         </section>
     </main>

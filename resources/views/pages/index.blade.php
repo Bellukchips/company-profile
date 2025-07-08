@@ -11,8 +11,8 @@
                             @php
                                 $setting = App\Models\Setting\Setting::first();
                             @endphp
-                            <h2>Welcome to {{ $setting->site_name }} </h2>
-                            <p>{{ $setting->overview }}
+                            <h2>Welcome to {{ $setting->site_name ?? '' }} </h2>
+                            <p>{{ $setting->overview ?? '' }}
                             </p>
                             <a href="#get-started" class="btn-get-started">Get Started</a>
                         </div>

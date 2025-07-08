@@ -73,23 +73,30 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request): RedirectResponse
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email:dns',],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email:dns'],
+        'password' => ['required'],
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-            return redirect()->route('index')->with('success', 'Login successfully!');
+        // Cek role setelah login
+        if (Auth::user()->role->role_name === 'admin') {
+            Auth::logout();
+            return back()->withErrors([
+                'email' => 'Admin is not allowed to login from this page.',
+            ])->onlyInput('email');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return redirect()->route('index')->with('success', 'Login successfully!');
     }
 
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ])->onlyInput('email');
+}
     public function logout(Request $request): RedirectResponse
     {
         // Ensure the user is authenticated before logging out

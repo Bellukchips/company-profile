@@ -8,7 +8,7 @@
         $setting = App\Models\Setting\Setting::first();
     @endphp
     <title>
-        {{ $setting->site_name }}
+        {{ $setting->site_name ?? '' }}
     </title>
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -67,28 +67,31 @@
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const servicesLink = document.getElementById("services-link");
-            const homeLink = document.getElementById("home-link");
-            const servicesSection = document.getElementById("services");
+        @if (Request::is('/'))
+            document.addEventListener("DOMContentLoaded", function() {
+                const servicesLink = document.getElementById("services-link");
+                const homeLink = document.getElementById("home-link");
+                const servicesSection = document.getElementById("services");
 
-            function updateActiveLink() {
-                const rect = servicesSection.getBoundingClientRect();
-                const isVisible = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement
-                    .clientHeight);
+                function updateActiveLink() {
+                    const rect = servicesSection.getBoundingClientRect();
+                    const isVisible = rect.top >= 0 && rect.bottom <= (window.innerHeight || document
+                        .documentElement
+                        .clientHeight);
 
-                if (isVisible) {
-                    servicesLink.classList.add("active");
-                    homeLink.classList.remove("active");
-                } else {
-                    servicesLink.classList.remove("active");
+                    if (isVisible) {
+                        servicesLink.classList.add("active");
+                        homeLink.classList.remove("active");
+                    } else {
+                        servicesLink.classList.remove("active");
+                    }
                 }
-            }
 
-            // Update on scroll and load
-            window.addEventListener("scroll", updateActiveLink);
-            updateActiveLink();
-        });
+                // Update on scroll and load
+                window.addEventListener("scroll", updateActiveLink);
+                updateActiveLink();
+            });
+        @endif
     </script>
     @stack('js')
 </body>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -29,3 +30,4 @@ Route::get('/project-finish', [TypeProjectController::class, 'projectFinished'])
 Route::get('/calculator-kpr', function () {
     return view('pages.calculator');
 })->name('calculator');
+Route::resource('/contactUs',ContactController::class)->except(["store", "create", "update", "destroy", "show","edit"]);

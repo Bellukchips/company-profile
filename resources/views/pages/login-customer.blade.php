@@ -11,19 +11,33 @@
                     </ol>
                 </nav>
             </div>
-        </div><!-- End Page Title -->
+        </div>
         <div class="container" style="height: 40vh;margin-top:50px;">
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
                     <div class="card shadow">
                         <div class="card-body">
                             <h3 class="card-title text-center text-warning mb-4">Masuk</h3>
-                            <form id="login-form" class="form" action="{{ route('login-area.authenticate') }}"
-                                method="post">
+
+                            @if(session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
+
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <form id="login-form" class="form" action="{{ route('login-area.authenticate') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email" class="text-warning">Email:</label>
-                                    <input type="text" name="email" id="email" class="form-control" required>
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="text-warning">Password:</label>
@@ -32,8 +46,8 @@
                                 <div class="form-group mt-2">
                                     <button type="submit" class="btn btn-warning btn-block">Masuk</button>
                                 </div>
-
                             </form>
+
                         </div>
                     </div>
                 </div>

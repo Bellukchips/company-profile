@@ -9,7 +9,7 @@
                     $setting = App\Models\Setting\Setting::first();
                 @endphp
 
-                {{ $setting->site_name }}
+                {{ $setting->site_name ?? ''}}
             </h1> <span></span>
         </a>
 
@@ -33,9 +33,8 @@
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="{{ route('calculator') }}">Perhitungan</a></li>
-                        @if (Auth::user() == null)
-                            <li><a href="{{ route('login-area.index') }}">Masuk Klient / Kustomer Area</a></li>
-                        @else
+                        @if (Auth::user() != null)
+
                             <li class="dropdown"><a href="#"><span>Proyek</span> <i
                                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
@@ -44,21 +43,26 @@
                                     <li><a href="{{ route('project.finish') }}">Selesai</a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <form action="{{ route('login-area.logout') }}" method="post"
-                                    style="display: inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-link text-start text-decoration-none"
-                                        style="color:black;margin-left:7px;">
-                                        Logout
-                                    </button>
-                                </form>
-                            </li>
+
                         @endif
                     </ul>
                 </li>
 
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{route('contactUs.index')}}">Contact</a></li>
+                @if (Auth::user() == null)
+                    <li class="p-2 btn btn-warning"><a href="{{ route('login-area.index') }}" style="color:white;">Masuk Kustomer Area</a></li>
+
+                @else
+                    <li>
+                        <form action="{{ route('login-area.logout') }}" method="post" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-warning text-start text-decoration-none"
+                                style="color:white;margin-left:7px;">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                @endif
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>

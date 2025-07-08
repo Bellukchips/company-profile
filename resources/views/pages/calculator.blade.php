@@ -58,13 +58,15 @@
                             <option value="300000">Modern</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-gray-700">Estimasi waktu yang diinginkan <span
+                     <div>
+                        <label class="block text-gray-700">Estimasi Bulan yang diinginkan <span
                                 class="text-red-500">*</span></label>
-                        <div class="flex">
-                            <input type="number" id="jangkaWaktu" class="w-full p-2 border rounded-l" value="0">
-                            <span class="inline-flex items-center px-3 bg-gray-300 border border-l-0 rounded-r">bulan</span>
-                        </div>
+                        <select id="jangkaWaktu" class="w-full mt-1 p-2 border rounded">
+                            <option>- Silakan Pilih -</option>
+                            <option value="3000000">1 Bulan</option>
+                            <option value="6000000">2 Bulan</option>
+                            <option value="9000000">3 Bulan </option>
+                        </select>
                     </div>
                     <div>
                         <label class="block text-gray-700">Kelas Bahan yang diinginkan <span
@@ -111,7 +113,7 @@
 
             // Simple calculation for demonstration purposes
 
-            const estimasiTotalBiaya = (lokasi + modelrumah + bahan) * panjangtanah * lebartanah * jangkaWaktu;
+            const estimasiTotalBiaya = (lokasi + modelrumah + bahan + jangkaWaktu) * panjangtanah * lebartanah;
 
 
 

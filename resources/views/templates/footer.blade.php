@@ -7,18 +7,18 @@
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6 footer-about">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <span class="sitename">{{ $setting->site_name }} </span>
+                    <span class="sitename">{{ $setting->site_name ?? '' }} </span>
                 </a>
                 <div class="footer-contact pt-3">
                     <p>
-                        {{ $contactUs->address }}
+                        {{ $contactUs->address ?? ''}}
                     </p>
 
                     <p class="mt-3"><strong>Phone:</strong> <span>
-                            {{ $contactUs->phone }}
+                            {{ $contactUs->phone ?? '' }}
                         </span></p>
                     <p><strong>Email:</strong> <span>
-                            {{ $contactUs->email }}
+                            {{ $contactUs->email ?? '' }}
                         </span></p>
                 </div>
                 <div class="social-links d-flex mt-4">
