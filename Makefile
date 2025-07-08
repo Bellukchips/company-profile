@@ -1,12 +1,12 @@
-.PHONY: help build up down restart logs shell db-migrate db-fresh cache-clear db-migrate-seed optimize queue-work tinker key-generate storage-link
+.PHONY: help build up down restart logs shell db-migrate db-fresh cache-clear db-migrate-seed optimize queue-work tinker key-generate storage-link publish-livewire publish-livewire-cvoborjagad publish-livewire-bookingps
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
 	@echo ''
 	@echo 'Targets:'
-	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-build: ## Build PenjurianDemo containers
+build: ## Build containers
 	docker compose build --no-cache
 
 up: ## Start all containers
@@ -18,10 +18,10 @@ down: ## Stop all containers
 restart: ## Restart all containers
 	docker compose restart
 
-logs: ## Show PenjurianDemo logs
+logs: ## Show logs
 	docker compose logs -f cvoborjagad
 
-shell: ## Access PenjurianDemo shell
+shell: ## Access shell inside cvoborjagad
 	docker compose exec cvoborjagad sh
 
 db-migrate: ## Run database migrations
@@ -55,3 +55,8 @@ key-generate: ## Generate application key
 
 storage-link: ## Create storage link
 	docker compose exec cvoborjagad php artisan storage:link
+
+publish-livewire: publish-livewire-cvoborjagad publish-livewire-bookingps ## Publish Livewire assets for all projects
+
+publish-livewire-cvoborjagad: ## Publish Livewire assets (cvoborjagad)
+	docker compose exec cvoborjagad php artisan vendor:publish --force --tag=livewire:assets
