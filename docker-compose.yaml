@@ -15,7 +15,7 @@ services:
     volumes:
       - ./:/var/www/cvoborjagad.my.id
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
-      - cvoborjagad_storage:/var/www/cvoborjagad.my.id/storage
+      - ./cvoborjagad/storage:/var/www/cvoborjagad.my.id/storage
       - ./.env:/var/www/cvoborjagad.my.id/.env
     environment:
       - PHP_IDE_CONFIG=serverName=cvoborjagad.my.id
