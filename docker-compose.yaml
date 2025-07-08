@@ -1,0 +1,32 @@
+
+services:
+  cvoborjagad:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+    container_name: cvoborjagad
+    restart: unless-stopped
+    ports:
+      - 9003:9000
+    working_dir: /var/www/cvoborjagad.my.id
+    volumes:
+      - ./:/var/www/cvoborjagad.my.id
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+      - cvoborjagad_storage:/var/www/cvoborjagad.my.id/storage
+      - ./.env:/var/www/cvoborjagad.my.id/.env
+    environment:
+      - PHP_IDE_CONFIG=serverName=cvoborjagad.my.id
+    networks:
+      - bellukstudio_network
+
+networks:
+  bellukstudio_network:
+    external: true
+
+# Volumes
+volumes:
+  cvoborjagad_storage:
+    driver: local
