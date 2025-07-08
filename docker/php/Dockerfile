@@ -111,7 +111,9 @@ RUN chown -R cvoborjagad.my.id:cvoborjagad.my.id /var/www/cvoborjagad.my.id/stor
 RUN chown -R cvoborjagad.my.id:cvoborjagad.my.id /var/www/cvoborjagad.my.id/bootstrap/cache
 RUN chmod -R 775 /var/www/cvoborjagad.my.id/storage
 RUN chmod -R 775 /var/www/cvoborjagad.my.id/bootstrap/cache
-RUN chmod -R 775 /var/www/cvoborjagad.my.id/public/template
+RUN chmod -R 775 /var/www/cvoborjagad.my.id/public/assets
+RUN chmod -R 775 /var/www/cvoborjagad.my.id/public/css
+RUN chmod -R 775 /var/www/cvoborjagad.my.id/public/js
 
 # Switch to application user for composer and npm
 USER cvoborjagad.my.id
