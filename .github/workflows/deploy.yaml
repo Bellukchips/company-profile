@@ -46,7 +46,6 @@ jobs:
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
           echo "🔧 Fixing storage & cache permissions inside container..."
-
-          docker exec -u 0 -it cvoborjagad sh -c "
+          sudo docker exec -u 0 cvoborjagad sh -c "
             chown -R cvoborjagad.my.id:cvoborjagad.my.id storage bootstrap/cache
           "
